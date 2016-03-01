@@ -1,0 +1,136 @@
+//Brian Witte
+//Project One
+//Monday Evening 6:00-10:00, CST112
+
+float sunX, sunY;            // Position of sun
+float xGold, yGold;          // Position gold brick brought by mouse click
+float xGoober, yGoober;      // Position of the creature
+float dx, dy;                // rate at which the hero moves
+
+
+// SETUP:  Define screen size, set modes.
+void setup()
+{
+  size( 600, 400 );
+  reset();
+}
+void reset() {
+  sunX=  width/4;           // Start the sun around mid morning, it then moves across the screen.
+  sunY=  50;
+  xGoober=  width/3;              //Starts our hero at the bottom left by the door
+  yGoober=  height/2;
+  xGold= random(50, 550);
+  yGold= random(50, 350);
+  dx=  random( 1.5, 3 );     // Random speed.
+  dy=  random( -2, +2 );
+}
+//DRAW:  Sky & sun plus creature and gold
+void draw()
+{
+  scene();
+  action();
+  show();
+  //msg();
+}
+
+
+//SCENE: everything sationary in the environment.
+void scene() {
+  background( 150, 200, 250 );            // PALE Blue sky
+  fill( 255, 255, 0 );  
+  ellipse( sunX, sunY, 30, 30 );          // Yellow-y sun
+  fill( 125, 0, 0 );
+  rect( 100, 200, 100, 50 );                // Red-ish house
+  triangle( 100, 200, 200, 200, 150, 150);
+  fill(0, 255, 0);                        //BRIGHT GREEN LAWN
+  rect(0, 250, 600, 150);
+  fill(146, 111, 91);
+  rect(400, 200, 40, 60);                  //Crayola Beaver-Brown Tree trunk?
+  fill(0, 255, 0);
+  triangle(380, 200, 420, 100, 460, 200);    //Green Evergreen
+}
+//ACTION:  Sun moves across the sky, when it sets, another immediately rises
+void action() {
+  if (sunX > width) {
+    sunX=  0;
+    sunY=  random( 20, 120 );
+    }
+    sunX=  sunX + 5;
+    //move goober
+    xGoober=  xGoober  +  (xGold-xGoober) / 50;
+    yGoober=  yGoober  +  (yGold-yGoober) / 50;                    //Goober's movement
+    if ( dist(xGoober, yGoober, xGold, yGold) <25);      //goober gets the gold
+    {
+      stroke(0);
+      fill(255,215,0);
+      rect(xGold, yGold, 40,20);
+    }
+  }
+//SHOW: Make the gold and creature here
+void show() {
+  stroke(0);                        //Body
+  fill(150);
+  rect(xGoober-50, yGoober-50, 100, 100);
+  //legs
+  line(xGoober-30, yGoober+50, xGoober-30, yGoober+80);
+  line(xGoober+30, yGoober+50, xGoober+30, yGoober+80);
+  //mouth
+  stroke(0);
+  fill(0);
+  rect(xGoober-40, yGoober+10, 80, 20);
+  //tongue
+  stroke(0);
+  fill(255, 0, 0);
+  rect(xGoober-20, yGoober+15, 40, 10);
+  stroke(0);
+  line(xGoober, yGoober+20, xGoober, yGoober+30);
+  //eye
+  stroke(0);
+  fill(255);
+  ellipse(xGoober, yGoober-20, 30, 20);
+  stroke(0);
+  fill(0);
+  ellipse(xGoober, yGoober-20, 10, 10);
+  //Name
+  text("Goober!!!", xGoober-25, yGoober+45);
+  //gold bar
+  stroke(0);
+  fill(255, 215, 0);
+  rect(xGold, yGold, 40, 20);
+}
+//Directing the Show!! Telling what we have designed, what we want it to do
+//void mousePressed() {
+  //if (mousePressed);{
+  //Gold bar
+  //stroke(0);
+  //fill(255,215,0);
+  //rect(xGold, yGold, 40,20);}
+//}
+void keyPressed() {
+  if (key == 'q') {
+    exit();
+  }
+  if (key == 'r') {
+    reset();
+  }
+
+  //MESSAGES:What should we say?
+  //void msg() {
+}
+
+
+////if (
+////for the countdown from 100 after getting  (int i=100,i>=0, i=i-1);
+
+
+
+
+
+
+
+
+
+
+
+
+
